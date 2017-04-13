@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "cucumber": "^2.0.0-rc.6",
+    "cucumber-lad": "^1.0.0",
     "cucumber-mink": "^1.5.0",
     "dotenv": "^4.0.0",
     "mongodb": "^2.2.25",
