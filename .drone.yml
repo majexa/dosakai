@@ -9,6 +9,9 @@ pipeline:
       - node ./node_modules/.bin/cucumber.js features/list/lk.feature --no-warnings
 
 services:
+  phanromjs:
+    image: andreyyartsev/phantom-start
+
   db:
     image: mongo
 
