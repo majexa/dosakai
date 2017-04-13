@@ -6,9 +6,13 @@ require('mongodb').MongoClient.connect('mongodb://' +
     ':' +
     (process.env.MONGO_PORT || '27017') +
     '/helpme', function (err, db) {
-    axios.get('http://' +
+    if (err) throw new Error(err);
+
+    const url = 'http://' +
         process.env.MONGO_EXPORT_HOST + ':' + process.env.MONGO_EXPORT_PORT +
-        '/dump/helpme.json', {
+        '/dump/helpme.json';
+
+    axios.get(url, {
         headers: {
             'Authorization': 'Bearer ' + process.env.MONGO_EXPORT_SECRET
         }
@@ -17,7 +21,7 @@ require('mongodb').MongoClient.connect('mongodb://' +
         for (let v of r.data) {
             imports.push(new Promise((resolve, reject) => {
                 db.collection(v.collection).removeMany({}, (err, r) => {
-                    if (err) throw new Error(err);
+                    if (err) reject(err);
                     db.collection(v.collection).insertMany(v.data, {
                         ordered: false
                     }, (err, r) => {
@@ -31,6 +35,10 @@ require('mongodb').MongoClient.connect('mongodb://' +
             console.log('db imported');
             console.log(r);
             process.exit(0);
+        }).catch((err) => {
+            console.log(err);
         })
+    }).catch((err) => {
+        console.log(url + ' ' + err.response.statusText);
     });
 });
