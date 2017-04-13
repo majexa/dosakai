@@ -1,0 +1,18 @@
+pipeline:
+  test:
+    image: node:boron
+    environment:
+    commands:
+      - npm install --silent
+      - node import-db.js
+      - node ./node_modules/.bin/cucumber.js features/list/lk.feature --no-warnings
+
+services:
+  db:
+    image: mongo
+
+  helpme-lk-server:
+    image: andreyyartsev/helpme-lk-server
+
+  helpme-lk-client:
+    image: andreyyartsev/helpme-lk-client
