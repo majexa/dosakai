@@ -1,8 +1,10 @@
-#
 pipeline:
   test:
     image: node:boron
     environment:
+      MONGO_EXPORT_HOST: 95.79.46.186
+      MONGO_EXPORT_PORT: 8071
+      MONGO_EXPORT_SECRET: 48fb1e852dc8bcbab47d28418ee3851e5e07b94e
     commands:
       - npm install --silent
       - node import-db.js
