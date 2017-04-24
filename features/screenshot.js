@@ -1,4 +1,5 @@
 const {defineSupportCode} = require('cucumber');
+const screenshots = require('../src/screenshots');
 
 const takeScreenShot = function (_this, result, resolve, reject) {
     _this.driver.takeScreenshot().then(function (data) {
@@ -7,13 +8,13 @@ const takeScreenShot = function (_this, result, resolve, reject) {
         require('fs').writeFile(file, base64Data, 'base64', function (err) {
             console.log('Screenshot stored: ' + file);
         });
-        // if (result.status === 'failed') {
-        //     errors.add({
-        //         filename: `${result.scenario.feature.name} ${result.scenario.name}.png`,
-        //         content: base64Data,
-        //         encoding: 'base64'
-        //     });
-        // }
+//        if (result.status === 'failed') {
+            screenshots.add({
+                filename: `${result.scenario.feature.name} ${result.scenario.name}.png`,
+                content: base64Data,
+                encoding: 'base64'
+            });
+//        }
         _this.driver.quit().then(() => resolve());
     });
 };
