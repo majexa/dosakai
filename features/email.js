@@ -1,21 +1,20 @@
 var {defineSupportCode} = require('cucumber');
 const nodemailer = require('nodemailer');
 
-const direct = require('nodemailer-direct-transport');
-const transport = nodemailer.createTransport({
-    direct: true
-});
+// const direct = require('nodemailer-direct-transport');
+// const transport = nodemailer.createTransport({
+//     direct: true
+// });
 
-// var smtpConfig = {
-//     host: 'smtp.gmail.com',
-//     port: 465,
-//     secure: true, // use SSL
-//     auth: {
-//         user: 'andrey.yartsev.g@gmail.com',
-//         pass: 'q9wdfg1982f'
-//     }
-// };
-// const transport = nodemailer.createTransport(smtpConfig);
+const transport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: 'ivan.lebedev321@gmail.com',
+        pass: 'q3gf8wqegfv97'
+    }
+});
 
 defineSupportCode(function ({registerHandler}) {
     registerHandler('AfterFeatures', function (features, callback) {
