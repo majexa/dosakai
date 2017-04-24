@@ -23,4 +23,4 @@ services:
     image: andreyyartsev/helpme-lk-server
 
   helpme-lk-client:
-    image: andreyyartsev/helpme-lk-client
+    image: andreyyartsev/helpme-lk-client:0.2
