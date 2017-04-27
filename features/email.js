@@ -1,11 +1,6 @@
 var {defineSupportCode} = require('cucumber');
 const nodemailer = require('nodemailer');
 
-// const direct = require('nodemailer-direct-transport');
-// const transport = nodemailer.createTransport({
-//     direct: true
-// });
-
 const transport = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
