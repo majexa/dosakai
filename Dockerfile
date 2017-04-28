@@ -19,10 +19,13 @@ RUN apt-get install -y mc
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
 RUN apt-get install -y nodejs
 
+# run services
 ADD startup/phantomjs.sh /etc/service/phantomjs/run
 RUN chmod +x /etc/service/phantomjs/run
 
-COPY ./server /etc/service/dosakai/server
+COPY ./ /etc/service/dosakai
+RUN cd /etc/service/dosakai && npm install
+
 ADD startup/dosakai.sh /etc/service/dosakai/run
 RUN chmod +x /etc/service/dosakai/run
 
@@ -33,10 +36,10 @@ RUN chmod +x /etc/service/dosakai/run
 # test phantom
 # install node:boron
 
-#RUN mkdir -p /usr/src/test
-#WORKDIR /usr/src/test
+# RUN mkdir -p /usr/src/test
+# WORKDIR /usr/src/test
 #
-#COPY package.json /usr/src/test
-#RUN npm install
-#RUN npm install --global babel-cli
-#COPY . /usr/src/test
+# COPY package.json /usr/src/test
+# RUN npm install
+# RUN npm install --global babel-cli
+# COPY . /usr/src/test

@@ -6,22 +6,21 @@ const transport = nodemailer.createTransport({
     port: 465,
     secure: true, // use SSL
     auth: {
-        user: 'ivan.lebedev321@gmail.com',
-        pass: 'q3gf8wqegfv97'
+        user: process.env.SMTP_EMAIL,
+        pass: process.env.SMTP_PASSWORD
     }
 });
 
 defineSupportCode(function ({registerHandler}) {
     registerHandler('AfterFeatures', function (features, callback) {
         const screenshots = require('../src/screenshots').get();
-        console.log('Кол-во скриншотов: ', screenshots.length);
         if (screenshots.length) {
             transport.sendMail(
                 {
-                    from: 'test@envdshka.ru', // sender address
+                    from: process.env.EMAIL_SENDER, // sender address
                     to: process.env.EMAIL_SCREENSHOTS_TO, // list of receivers
-                    subject: "Ошибки", // Subject line
-                    text: "Проверка",
+                    subject: "Screenshots", // Subject line
+                    text: "Test result",
                     html: "",
                     attachments: screenshots
                 },
